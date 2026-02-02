@@ -39,7 +39,7 @@ export const createSport = (req, res) => {
   sports.push(newSport);
 
   try {
-    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports, null, 2));
+    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports));
 
     res.status(200).json({
       status: "success",
@@ -67,7 +67,7 @@ export const updateSport = (req, res) => {
 
   sports[index] = { ...sports[index], ...req.body };
   try {
-    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports, null, 2));
+    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports));
 
     res.status(200).json({
       status: "success",

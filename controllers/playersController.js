@@ -17,7 +17,7 @@ export const addPlayerToSport = (req, res) => {
   };
   sport.players.push(newPlayer);
   try {
-    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports, null, 2));
+    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports));
     res.status(201).json({
       status: "success",
       data: newPlayer,
@@ -49,7 +49,7 @@ export const deletePlayer = (req, res) => {
   sport.players.splice(playerIndex, 1);
 
   try {
-    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports, null, 2));
+    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports));
     res
       .status(204)
       .json({ status: "success", data: null, message: "You deleted player" });
