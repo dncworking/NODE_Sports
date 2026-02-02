@@ -1,14 +1,14 @@
 [
   {
-    "id": 1,
-    "name": "Football",
-    "popularityRank": 1,
+    "id": 2,
+    "name": "Basketball",
+    "popularityRank": 2,
     "players": [
       {
-        "id": "101",
-        "name": "John Doe",
-        "age": 25,
-        "position": "Forward"
+        "id": "201",
+        "name": "Jonas Valanciunas",
+        "age": 31,
+        "position": "Center"
       }
     ]
   }

@@ -1,0 +1,15 @@
+meta {
+  name: AddPlayer
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/sports/1/players
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

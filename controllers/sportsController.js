@@ -39,7 +39,7 @@ export const createSport = (req, res) => {
   sports.push(newSport);
 
   try {
-    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports)); //null, 2
+    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports, null, 2));
 
     res.status(200).json({
       status: "success",
@@ -54,11 +54,10 @@ export const createSport = (req, res) => {
 };
 export const updateSport = (req, res) => {
   const { id } = req.params;
-  const newSportData = req.body;
 
-  const sport = sports.find((s) => s.id === id);
+  const index = sports.findIndex((s) => s.id === +id);
 
-  if (!sport) {
+  if (index === -1) {
     res.status(404).json({
       status: "fail",
       message: "Invalid ID",
@@ -66,21 +65,13 @@ export const updateSport = (req, res) => {
     return;
   }
 
-  const sportsFiltered = sports.filter((s) => s.id !== id);
-
-  const updatedSport = { ...sport, ...newSportData };
-
-  sportsFiltered.push(updatedSport);
-
+  sports[index] = { ...sports[index], ...req.body };
   try {
-    fs.writeFileSync(
-      "./data/sportsData.json",
-      JSON.stringify(sportsFiltered, null, 2),
-    );
+    fs.writeFileSync("./data/sportsData.json", JSON.stringify(sports, null, 2));
 
     res.status(200).json({
       status: "success",
-      data: updatedSport,
+      data: sports[index],
     });
   } catch (err) {
     res.status(500).json({
@@ -93,13 +84,13 @@ export const updateSport = (req, res) => {
 export const deleteSport = (req, res) => {
   const { id } = req.params;
 
-  const sportExists = sports.some((s) => s.id === id);
+  const sportExists = sports.some((s) => s.id === +id);
   if (!sportExists) {
     res.status(404).json({ status: "fail", message: "ID not found" });
     return;
   }
 
-  const sportsFiltered = sports.filter((s) => s.id !== id);
+  const sportsFiltered = sports.filter((s) => s.id !== +id);
 
   try {
     fs.writeFileSync(
@@ -114,4 +105,21 @@ export const deleteSport = (req, res) => {
   } catch (err) {
     res.status(500).json({ status: "fail", message: err.message });
   }
+};
+
+export const getPlayersBySport = (req, res) => {
+  const { id } = req.params;
+  const sport = sports.find((s) => s.id === +id);
+
+  if (!sport) {
+    res.status(404).json({
+      status: "fail",
+      message: "Sport not found",
+    });
+    return;
+  }
+  res.status(200).json({
+    status: "suceess",
+    data: sport.playres,
+  });
 };

@@ -1,0 +1,15 @@
+meta {
+  name: deletePlayer
+  type: http
+  seq: 4
+}
+
+delete {
+  url: http://localhost:3000/sports/1/players/10
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

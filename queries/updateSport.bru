@@ -1,0 +1,19 @@
+meta {
+  name: updateSport
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://localhost:3000?sports/1
+  body: none
+  auth: inherit
+}
+
+params:query {
+  sports/1: 
+}
+
+settings {
+  encodeUrl: true
+}
